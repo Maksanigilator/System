@@ -24,10 +24,24 @@ def _entropy_base2(probabilities: List[float]) -> float:
     return h
 
 
+def _get_builder():
+
+    try:
+        from task1.task import main as build_predicate_matrices
+        return build_predicate_matrices
+    except Exception:
+        # Fallback when executed as a standalone script
+        import sys
+        from pathlib import Path
+        sys.path.append(str(Path(__file__).resolve().parents[1]))
+        from task1.task import main as build_predicate_matrices
+        return build_predicate_matrices
+
+
 def main(s: str, e: str) -> Tuple[float, float]:
 
     # Reuse predicate matrices from task1
-    from task1.task import main as build_predicate_matrices
+    build_predicate_matrices = _get_builder()
 
     r1, r2, r3, r4, r5 = build_predicate_matrices(s, e)
 
@@ -51,7 +65,7 @@ def main(s: str, e: str) -> Tuple[float, float]:
 
 def print_result(s: str, e: str) -> None:
 
-    from task1.task import main as build_predicate_matrices
+    build_predicate_matrices = _get_builder()
 
     r1, r2, r3, r4, r5 = build_predicate_matrices(s, e)
     counts = [
