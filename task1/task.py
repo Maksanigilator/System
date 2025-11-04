@@ -3,7 +3,11 @@ from typing import List, Tuple, Dict, Set
 
 def _parse_edges(csv_edges: str) -> List[Tuple[int, int]]:
 
-    lines: List[str] = [line.strip() for line in csv_edges.strip().splitlines() if line.strip()]
+    text = csv_edges.strip()
+    # Support literals like "1,2\n1,3" passed via CLI quotes
+    if "\\n" in text and "\n" not in text:
+        text = text.replace("\\n", "\n")
+    lines: List[str] = [line.strip() for line in text.splitlines() if line.strip()]
     edges: List[Tuple[int, int]] = []
     for line in lines:
         parts = [p.strip() for p in line.split(',')]
