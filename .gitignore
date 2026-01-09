@@ -1,0 +1,21 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+.venv/
+
+# IDE / editor
+.idea/misc.xml
+.idea/**/workspace.xml
+*.code-workspace
+
+# Office / учебные материалы
+*.pdf
+*.docx
+
+# Папки с текстами заданий (не пушим)
+задание4/
+
+# LibreOffice lock files
+.~lock.*
+
